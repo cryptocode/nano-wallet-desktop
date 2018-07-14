@@ -100,9 +100,12 @@ global.isNodeStarted = false;
 global.isQuitting = false;
 global.authorizationToken = null;
 
-app.on('before-quit', () => {
+const onBeforeQuit = () => {
   global.isQuitting = true;
-});
+};
+
+app.on('before-quit', onBeforeQuit);
+app.on('before-quit-for-update', onBeforeQuit);
 
 app.on('window-all-closed', () => {
   if (!is.macos) {
